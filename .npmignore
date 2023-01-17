@@ -1,0 +1,14 @@
+**/.github
+**/.storybook
+**/node_modules
+**/scripts
+**/src
+.env*
+.eslintrc
+.gitignore
+.npmignore
+.huskyrc
+.npmrc
+.prettierrc.js
+version-up.js
+tsconfig.json

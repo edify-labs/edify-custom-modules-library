@@ -1,0 +1,43 @@
+{
+  "name": "edify-custom-modules-library",
+  "version": "0.0.1",
+  "description": "edify-custom-modules-library",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.edifylabs.net:edify/edify-custom-modules-library.git"
+  },
+  "keywords": [],
+  "author": "Edify Labs",
+  "license": "ISC",
+  "devDependencies": {
+    "@edify/eslint-config-node": "0.0.12",
+    "@edify/fetch-env": "0.0.29",
+    "@types/jest": "^27.4.0",
+    "@typescript-eslint/eslint-plugin": "^5.6.0",
+    "@typescript-eslint/parser": "^5.6.0",
+    "eslint": "^8.19.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-jest": "^25.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "husky": "^7.0.4",
+    "import-sort-style-module": "^6.0.0",
+    "jest": "^27.1.3",
+    "prettier": "^2.5.1",
+    "prettier-plugin-import-sort": "0.0.7",
+    "semver": "^7.3.2",
+    "ts-jest": "^27.1.3",
+    "typescript": "^4.5.3"
+  },
+  "importSort": {
+    ".js, .jsx, .ts, .tsx": {
+      "style": "module",
+      "parser": "typescript"
+    }
+  }
+}
