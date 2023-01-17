@@ -1,0 +1,42 @@
+{
+  "api": {
+    "uri": "",
+    "method": "",
+    "header": {},
+    "body": {},
+    "waitForCallback": {
+      "wait": true,
+      "collapsed": true,
+      "onTimeout": {
+        "valueMap": {
+          "any": {
+            "label": "",
+            "actions": [],
+            "exitPort": "",
+            "httpCode": "",
+            "collapsed": false
+          }
+        },
+        "valueAccessor": ""
+      },
+      "onCallback": {
+          "valueMap": {
+            "any": {
+              "label": "",
+              "actions": [],
+              "exitPort": "",
+              "httpCode": "",
+              "collapsed": false
+            }
+          },
+          "valueAccessor": ""
+      },
+      "toggleLabel": "",
+      "sectionLabel": "",
+      "timeoutLabel": "",
+      "timeoutUnits": ["seconds", "minutes"],
+      "timeoutUnitDefaultValue": "minutes",
+      "timeoutScalarDefaultValue": 1
+    }
+  }
+}

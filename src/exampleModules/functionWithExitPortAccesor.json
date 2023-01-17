@@ -1,0 +1,116 @@
+{
+    "name": "Track Loop Count",
+    "sections": [
+        {
+            "label": "Tracking",
+            "inputs": [
+                {
+                    "name": "maxLoopCount",
+                    "type": "input",
+                    "label": "Max Loop Count",
+                    "subtype": "number",
+                    "valuesType": "static",
+                    "defaultValue": "5"
+                }
+            ]
+        }
+    ],
+    "exitPorts": [
+        {
+            "name": "maxNotReached",
+            "label": "Keep Going",
+            "hoverColor": "#527E36",
+            "backgroundColor": "#5D933C"
+        },
+        {
+            "name": "maxReached",
+            "label": "Max Reached",
+            "hoverColor": "#3E5A2C",
+            "backgroundColor": "#4F7339"
+        }
+    ],
+    "publisher": {
+        "name": "Edify Labs, Inc.",
+        "website": "https://edify.cx",
+        "description": "Tracks amount of time a workflow process has ran and enforces a max limit",
+        "licenseType": "Example License"
+    },
+    "formatting": {
+        "titleBar": {
+            "icon": "redo",
+            "backgroundColor": "#4F7339"
+        }
+    },
+    "moduleVersion": "1.0",
+    "functionConfig": {
+        "code": "function updateLoop({ currentCount = 1, maxLoopCount, resetLoop = false }) { if (resetLoop) { return { newCount: 1, hasReachedMax: 1 > maxLoopCount }; } const newCount = currentCount + 1; return { newCount, hasReachedMax: newCount > maxLoopCount };} module.exports = updateLoop;",
+        "onFail": {
+            "label": "Fail",
+            "actions": [
+                {
+                    "label": "Set Variables",
+                    "action": "set-variables",
+                    "config": {
+                        "variables": [
+                            {
+                                "name": "loopStatus",
+                                "value": "fail"
+                            }
+                        ]
+                    },
+                    "editable": false,
+                    "collapsed": false
+                }
+            ],
+            "exitPort": "maxReached",
+            "httpCode": "any",
+            "collapsed": false
+        },
+        "onSuccess": {
+            "label": "Success",
+            "actions": [
+                {
+                    "label": "Set Variables",
+                    "action": "set-variables",
+                    "config": {
+                        "variables": [
+                            {
+                                "name": "loopCount_{{workflowItemId}}",
+                                "value": "$.newCount"
+                            },
+                            {
+                                "name": "loopStatus",
+                                "value": "success"
+                            }
+                        ]
+                    },
+                    "showing": false,
+                    "editable": false,
+                    "collapsed": false
+                }
+            ],
+            "exitPort": "maxReached",
+            "httpCode": "200",
+            "collapsed": false,
+            "exitPortValueMap": {
+                "true": "maxReached",
+                "false": "maxNotReached"
+            },
+            "exitPortValueAccessor": "$.hasReachedMax"
+        },
+        "argumentsList": [
+            {
+                "name": "currentCount",
+                "value": "{{loopCount_{{workflowItemId}}}}",
+                "valueType": "integer",
+                "isFromSections": false
+            },
+            {
+                "name": "maxLoopCount",
+                "valueType": "integer",
+                "isFromSections": true
+            }
+        ]
+    },
+    "documentVersion": "1.0"
+}

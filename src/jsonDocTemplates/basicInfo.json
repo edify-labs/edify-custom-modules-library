@@ -1,0 +1,20 @@
+{
+  "name": "",
+  "sections": [],
+  "exitPorts": [],
+  "publisher": {
+      "name": "",
+      "website": "",
+      "description": "",
+      "licenseType": ""
+  },
+  "formatting": {
+      "titleBar": {
+          "icon": "",
+          "backgroundColor": ""
+      }
+  },
+  "moduleVersion": "1.0",
+  "documentVersion": "1.0",
+  "customVariables": []
+}

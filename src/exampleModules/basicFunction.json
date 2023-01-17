@@ -1,0 +1,132 @@
+{
+  "name": "String Replace",
+  "sections": [
+      {
+          "label": "String Replace",
+          "inputs": [
+              {
+                  "name": "string",
+                  "type": "input",
+                  "label": "String",
+                  "subtype": "text",
+                  "valuesType": "static",
+                  "defaultValue": ""
+              },
+              {
+                  "name": "search",
+                  "type": "input",
+                  "label": "Search",
+                  "subtype": "text",
+                  "valuesType": "static",
+                  "defaultValue": ""
+              },
+              {
+                  "name": "replace",
+                  "type": "input",
+                  "label": "Replacement Value",
+                  "subtype": "text",
+                  "valuesType": "static",
+                  "defaultValue": ""
+              }
+          ]
+      }
+  ],
+  "exitPorts": [
+      {
+          "name": "success",
+          "label": "Success",
+          "hoverColor": "#3E5A2C",
+          "backgroundColor": "#4F7339"
+      },
+      {
+          "name": "fail",
+          "label": "Failed",
+          "hoverColor": "#527E36",
+          "backgroundColor": "#5D933C"
+      }
+  ],
+  "publisher": {
+      "name": "Edify Labs, Inc.",
+      "website": "https://edify.cx",
+      "description": "Replaces the given search with the given replacement ",
+      "licenseType": "Example License"
+  },
+  "formatting": {
+      "titleBar": {
+          "icon": "plus",
+          "backgroundColor": "#4F7339"
+      }
+  },
+  "moduleVersion": "1.0",
+  "functionConfig": {
+      "code": "function replace({ string, search, replace }) {return string.replace(search, replace);} module.exports = replace;",
+      "onFail": {
+          "label": "Fail",
+          "actions": [
+              {
+                  "label": "Set Variables",
+                  "action": "set-variables",
+                  "config": {
+                      "variables": [
+                          {
+                              "name": "didReplaceFail",
+                              "value": "true"
+                          }
+                      ]
+                  },
+                  "editable": true,
+                  "collapsed": false
+              }
+          ],
+          "exitPort": "fail",
+          "exitPortValueMap": {},
+          "exitPortValueAccessor": "",
+          "collapsed": false
+      },
+      "onSuccess": {
+          "label": "Success",
+          "actions": [
+              {
+                  "label": "Set Variables",
+                  "action": "set-variables",
+                  "config": {
+                      "variables": [
+                          {
+                              "name": "replacedString",
+                              "value": "{{returnValueFromFunction}}"
+                          },
+                          {
+                              "name": "didReplaceFail",
+                              "value": "false"
+                          }
+                      ]
+                  },
+                  "editable": true,
+                  "collapsed": false
+              }
+          ],
+          "exitPort": "success",
+          "exitPortValueMap": {},
+          "exitPortValueAccessor": "",
+          "collapsed": false
+      },
+      "argumentsList": [
+          {
+              "name": "search",
+              "valueType": "string",
+              "isFromSections": true
+          },
+          {
+              "name": "string",
+              "valueType": "string",
+              "isFromSections": true
+          },
+          {
+              "name": "replace",
+              "valueType": "string",
+              "isFromSections": true
+          }
+      ]
+  },
+  "documentVersion": "1.0"
+}

@@ -1,0 +1,22 @@
+{
+  "functionConfig": {
+    "code": "",
+    "onFail": {
+        "label": "",
+        "actions": [],
+        "collapsed": false,
+        "exitPort": "maxReached",
+        "exitPortValueMap": {},
+        "exitPortValueAccessor": ""
+    },
+    "onSuccess": {
+        "label": "",
+        "actions": [],
+        "collapsed": false,
+        "exitPort": "",
+        "exitPortValueMap": {},
+        "exitPortValueAccessor": ""
+    },
+    "argumentsList": []
+  }
+}

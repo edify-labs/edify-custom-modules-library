@@ -1,0 +1,138 @@
+{
+  "api": {
+      "url": "https://dev-api.edifydev.net/v4/wf-callback-test",
+      "method": "post",
+      "headers": {
+          "u": "{{edify.user.email}}:{{edify.user.apiToken}}",
+          "content-type": "application/json"
+      },
+      "waitForCallback": {
+          "wait": true,
+          "collapsed": true,
+          "onTimeout": {
+              "valueMap": {
+                  "any": {
+                      "label": "Fail",
+                      "actions": [
+                          {
+                              "label": "Set Variables",
+                              "action": "set-variables",
+                              "config": {
+                                  "variables": [
+                                      {
+                                          "name": "didGetWords",
+                                          "value": "false"
+                                      }
+                                  ]
+                              },
+                              "editable": false,
+                              "collapsed": false
+                          }
+                      ],
+                      "exitPort": "fail",
+                      "exitPortValueMap": {},
+                      "exitPortValueAccessor": "",
+                      "httpCode": "200",
+                      "collapsed": true
+                  }
+              },
+              "valueAccessor": "$.result"
+          },
+          "onCallback": {
+              "valueMap": {
+                  "any": {
+                      "label": "Fail",
+                      "actions": [
+                          {
+                              "label": "Set Variables",
+                              "action": "set-variables",
+                              "config": {
+                                  "variables": [
+                                      {
+                                          "name": "didGetWords",
+                                          "value": "false"
+                                      }
+                                  ]
+                              },
+                              "editable": false,
+                              "collapsed": false
+                          }
+                      ],
+                      "exitPort": "fail",
+                      "exitPortValueMap": {},
+                      "exitPortValueAccessor": "",
+                      "httpCode": "200",
+                      "collapsed": true
+                  },
+                  "success": {
+                      "label": "Success",
+                      "actions": [
+                          {
+                              "label": "Set Variables",
+                              "action": "set-variables",
+                              "config": {
+                                  "variables": [
+                                      {
+                                          "name": "didGetWords",
+                                          "value": "true"
+                                      },
+                                      {
+                                          "name": "words",
+                                          "value": "$.outcome.text"
+                                      }
+                                  ]
+                              },
+                              "editable": false,
+                              "collapsed": false
+                          }
+                      ],
+                      "exitPort": "success",
+                      "exitPortValueMap": {},
+                      "exitPortValueAccessor": "",
+                      "collapsed": false
+                  }
+              },
+              "valueAccessor": "$.result"
+          },
+          "toggleLabel": "Wait for Notification",
+          "sectionLabel": "DELIVERY NOTIFICATION",
+          "timeoutLabel": "Max Time to Wait",
+          "timeoutUnits": [
+              "seconds",
+              "minutes"
+          ],
+          "timeoutUnitDefaultValue": "seconds",
+          "timeoutScalarDefaultValue": 55
+      }
+  },
+  "name": "Callback Test",
+  "sections": [],
+  "exitPorts": [
+      {
+          "name": "success",
+          "label": "Success",
+          "hoverColor": "#3E5A2C",
+          "backgroundColor": "#4F7339"
+      },
+      {
+          "name": "fail",
+          "label": "Fail",
+          "hoverColor": "#527E36",
+          "backgroundColor": "#5D933C"
+      }
+  ],
+  "publisher": {
+      "name": "Edify Labs, Inc.",
+      "website": "https://edify.cx",
+      "description": "This creates a new status reason",
+      "licenseType": "Example License"
+  },
+  "formatting": {
+      "titleBar": {
+          "icon": "circle-phone",
+          "backgroundColor": "#4F7339"
+      }
+  },
+  "moduleVersion": "1.0",
+  "documentVersion": "1.0"
+}

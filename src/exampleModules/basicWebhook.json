@@ -1,0 +1,135 @@
+{
+  "api": {
+    "url": "https://dev-api.edifydev.net/v4/reasons",
+    "method": "post",
+    "headers": {
+        "u": "{{edify.user.email}}:{{edify.user.apiToken}}",
+        "content-type": "application/json"
+    },
+    "onResponse": {
+        "valueMap": {
+            "200": {
+                "label": "Success",
+                "actions": [
+                    {
+                        "label": "Set Variables",
+                        "action": "set-variables",
+                        "config": {
+                            "variables": [
+                                {
+                                    "name": "newReasonId",
+                                    "value": "id: {{$.reason.id}}"
+                                }
+                            ]
+                        },
+                        "editable": true,
+                        "collapsed": false
+                    }
+                ],
+                "exitPort": "success",
+                "exitPortValueMap": {},
+                "exitPortValueAccessor": "",
+                "httpCode": "200",
+                "collapsed": false
+            },
+            "any": {
+                "label": "Fail",
+                "actions": [
+                    {
+                        "label": "Set Variables",
+                        "action": "set-variables",
+                        "config": {
+                            "variables": [
+                                {
+                                    "name": "newReasonId",
+                                    "value": "failed"
+                                }
+                            ]
+                        },
+                        "editable": false,
+                        "collapsed": false
+                    }
+                ],
+                "exitPort": "fail",
+                "exitPortValueMap": {},
+                "exitPortValueAccessor": "",
+                "httpCode": "any",
+                "collapsed": false
+            }
+        },
+        "valueAccessor": "{{http-status-code}}"
+    }
+  },
+  "name": "Create Reason",
+  "sections": [
+      {
+          "label": "Reason",
+          "inputs": [
+              {
+                  "name": "reason",
+                  "type": "input",
+                  "label": "Reason",
+                  "subtype": "text",
+                  "valuesType": "static",
+                  "defaultValue": ""
+              },
+              {
+                  "name": "type",
+                  "type": "dropdown",
+                  "label": "Type",
+                  "values": [
+                      {
+                          "label": "Away",
+                          "value": "away"
+                      },
+                      {
+                          "label": "Busy",
+                          "value": "busy"
+                      },
+                      {
+                          "label": "Available",
+                          "value": "available"
+                      }
+                  ],
+                  "valuesType": "static",
+                  "defaultValue": "away"
+              },
+              {
+                  "name": "includeInReporting",
+                  "type": "toggle",
+                  "label": "Include in Reporting",
+                  "valuesType": "static",
+                  "defaultValue": false
+              }
+          ]
+      }
+  ],
+  "exitPorts": [
+      {
+          "name": "success",
+          "label": "Success",
+          "hoverColor": "#3E5A2C",
+          "backgroundColor": "#4F7339"
+      },
+      {
+          "name": "fail",
+          "label": "Fail",
+          "hoverColor": "#527E36",
+          "backgroundColor": "#5D933C"
+      }
+  ],
+  "publisher": {
+      "name": "Edify Labs, Inc.",
+      "website": "https://edify.cx",
+      "description": "This creates a new status reason",
+      "licenseType": "Example License"
+  },
+  "formatting": {
+      "titleBar": {
+          "icon": "signal",
+          "backgroundColor": "#4F7339"
+      }
+  },
+  "moduleVersion": "1.0",
+  "documentVersion": "1.0"
+}
