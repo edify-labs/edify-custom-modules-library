@@ -1,7 +1,5 @@
 {
   "hooks": {
     "pre-commit": "eslint ./src --fix && npm run build && npm run test",
-    "post-merge": "node ./scripts/hooks/post-merge.js",
-    "post-checkout": "node ./scripts/hooks/post-checkout.js"
   }
 }
