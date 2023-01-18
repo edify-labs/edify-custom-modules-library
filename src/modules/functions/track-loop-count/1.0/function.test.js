@@ -26,7 +26,7 @@ describe('track loop count', () => {
     const maxLoopCount = 5;
 
     const { hasReachedMax, newCount } = updateLoop({ currentCount, maxLoopCount });
-    console.log('has reached: ', hasReachedMax)
+
     expect(newCount).toEqual(6);
     expect(hasReachedMax).toEqual(true);
   });

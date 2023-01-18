@@ -8,7 +8,7 @@ function updateLoop({
   } 
   
   const newCount = currentCount + 1; 
-  console.log({maxLoopCount, newCount})
+
   return { newCount, hasReachedMax: newCount > maxLoopCount };
 }
 
