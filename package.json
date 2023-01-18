@@ -4,7 +4,8 @@
   "description": "edify-custom-modules-library",
   "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "rm -rf dist && npx tsc",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
