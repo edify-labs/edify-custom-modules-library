@@ -4,6 +4,8 @@
   "description": "edify-custom-modules-library",
   "main": "dist/index.js",
   "scripts": {
+    "addModule": "node ./bin/addNewModule.js",
+    "addVersion": "node ./bin/addNewModuleVersion.js",
     "build": "rm -rf dist && npx babel src --out-dir dist --copy-files",
     "test": "jest"
   },
@@ -35,6 +37,7 @@
     "jest": "^27.1.3",
     "prettier": "^2.5.1",
     "prettier-plugin-import-sort": "0.0.7",
+    "prompt": "^1.3.0",
     "yargs": "^15.3.1"
   }
 }
