@@ -1,15 +1,20 @@
 const fs = require('fs');
 const prompts = require('prompts');
 const path = require('path');
+const yargs = require('yargs');
+const { toBoolean } = require('@edify/js-utils/bool');
 
 const basicInfo = require('./jsonDocTemplates/basicInfo.json');
 const functionConfig = require('./jsonDocTemplates/functionConfig.json');
 const webhookBasicConfig = require('./jsonDocTemplates/webhookConfig.json');
 const webhookWithWaitForCallback = require('./jsonDocTemplates/webhookWithWaitForCallback.json');
 
-prompts.override(require('yargs').argv);
+prompts.override(yargs.argv);
 
+const args = yargs.option('isNewModule').argv;
 (async () => {
+  const isNewModule = toBoolean(args.isNewModule);
+  console.log(isNewModule)
   const { type, name, versionNumber, webhookType } = await prompts([
     {
       type: 'select',
@@ -32,7 +37,7 @@ prompts.override(require('yargs').argv);
     {
       type: 'text',
       name: 'name',
-      message: 'What is the name of the module',
+      message: `What is the name of the module${isNewModule ? '' : ' (match the directory name of module)'}`,
       validate: value => !!value || 'Must provide a module name',
     },
     {
@@ -45,21 +50,29 @@ prompts.override(require('yargs').argv);
   ]);
 
   if (!name || !type || !versionNumber || (type === 'webhook' && !webhookType)) {
-    return;
+    throw new Error('Missing values from prompt');
   }
 
   const moduleName = getFormattedModuleName(name);
 
   const moduleLookupPath = path.join(__dirname, `../src/modules/${type === 'customFunction' ? 'functions' : 'webhooks'}/${moduleName}`);
   const moduleExists = fs.existsSync(moduleLookupPath);
-  if (moduleExists) {
-    throw new Error('There is already a module with this name');
+
+  if (args.isNewModule) {
+    if (moduleExists) {
+      throw new Error('There is already a module with this name');
+    }
+  } else if (!moduleExists) {
+    throw new Error('No module found matching provided name');
   }
 
   const pathWithVersionNumber = `${moduleLookupPath}/${versionNumber}`;
-  fs.mkdirSync(moduleLookupPath);
+  if (isNewModule) {
+    fs.mkdirSync(moduleLookupPath);
+    fs.writeFileSync(`${moduleLookupPath}/README.md`, `# ${name}`);
+  }
+
   fs.mkdirSync(pathWithVersionNumber);
-  fs.writeFileSync(`${moduleLookupPath}/README.md`, `# ${name}`);
   fs.writeFileSync(`${pathWithVersionNumber}/module.json`, JSON.stringify(getModuleJson(name, moduleName, versionNumber, type, webhookType), null, 2));
   
   if (type === 'customFunction') {
