@@ -43,7 +43,7 @@
     },
     "moduleVersion": "1.0",
     "functionConfig": {
-        "code": "function updateLoop({ currentCount = 1, maxLoopCount, resetLoop = false }) { if (resetLoop) { return { newCount: 1, hasReachedMax: 1 > maxLoopCount }; } const newCount = currentCount + 1; return { newCount, hasReachedMax: newCount > maxLoopCount };} module.exports = updateLoop;",
+        "code": "/src/modules/functions/track-loop-count/1.0/function.js",
         "onFail": {
             "label": "Fail",
             "actions": [
