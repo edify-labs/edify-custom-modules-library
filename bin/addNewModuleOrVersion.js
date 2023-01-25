@@ -14,7 +14,6 @@ prompts.override(yargs.argv);
 const args = yargs.option('isNewModule').argv;
 (async () => {
   const isNewModule = toBoolean(args.isNewModule);
-  console.log(isNewModule)
   const { type, name, versionNumber, webhookType } = await prompts([
     {
       type: 'select',
@@ -44,7 +43,7 @@ const args = yargs.option('isNewModule').argv;
       type: 'text',
       name: 'versionNumber',
       message: 'What is the first version number?',
-      initial: '1.0',
+      ...(isNewModule ? { initial: '1.0' } : {}),
       validate: value => !!value || 'Must provide a version number',
     },
   ]);
@@ -70,6 +69,11 @@ const args = yargs.option('isNewModule').argv;
   if (isNewModule) {
     fs.mkdirSync(moduleLookupPath);
     fs.writeFileSync(`${moduleLookupPath}/README.md`, `# ${name}`);
+  } else {
+    const moduleVersionExists = fs.existsSync(pathWithVersionNumber);
+    if (moduleVersionExists) {
+      throw new Error(`${moduleName} already has a version ${versionNumber}`);
+    }
   }
 
   fs.mkdirSync(pathWithVersionNumber);
@@ -79,11 +83,9 @@ const args = yargs.option('isNewModule').argv;
     const createFiles = [
       {
         name: `${pathWithVersionNumber}/function.js`,
-        content: `
-        function functionName() {}
+        content: `function functionName() {}
         
-        module.exports = functionName;
-        `
+module.exports = functionName;`,
       },
       {
         name: `${pathWithVersionNumber}/function.test.js`,
