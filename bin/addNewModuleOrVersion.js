@@ -85,7 +85,7 @@ const args = yargs.option('isNewModule').argv;
         name: `${pathWithVersionNumber}/function.js`,
         content: `function functionName() {}
         
-        module.exports = functionName;`,
+module.exports = functionName;`,
       },
       {
         name: `${pathWithVersionNumber}/function.test.js`,
