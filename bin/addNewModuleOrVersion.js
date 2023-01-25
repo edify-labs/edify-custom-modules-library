@@ -14,7 +14,6 @@ prompts.override(yargs.argv);
 const args = yargs.option('isNewModule').argv;
 (async () => {
   const isNewModule = toBoolean(args.isNewModule);
-  console.log(isNewModule)
   const { type, name, versionNumber, webhookType } = await prompts([
     {
       type: 'select',
