@@ -2,7 +2,6 @@ const fs = require('fs');
 const prompts = require('prompts');
 const path = require('path');
 const yargs = require('yargs');
-const { toBoolean } = require('@edify/js-utils/bool');
 
 const basicInfo = require('./jsonDocTemplates/basicInfo.json');
 const functionConfig = require('./jsonDocTemplates/functionConfig.json');
@@ -13,7 +12,7 @@ prompts.override(yargs.argv);
 
 const args = yargs.option('isNewModule').argv;
 (async () => {
-  const isNewModule = toBoolean(args.isNewModule);
+  const isNewModule = !!args.isNewModule;
   const { type, name, versionNumber, webhookType } = await prompts([
     {
       type: 'select',
