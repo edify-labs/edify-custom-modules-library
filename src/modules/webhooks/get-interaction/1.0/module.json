@@ -1,0 +1,40 @@
+{
+  "name": "Get Interaction",
+  "sections": [],
+  "exitPorts": [],
+  "publisher": {
+    "name": "",
+    "website": "",
+    "description": "",
+    "licenseType": ""
+  },
+  "formatting": {
+    "titleBar": {
+      "icon": "",
+      "backgroundColor": ""
+    }
+  },
+  "moduleVersion": "1.0",
+  "documentVersion": "1.0",
+  "customVariables": [],
+  "api": {
+    "uri": "",
+    "method": "",
+    "header": {},
+    "body": {},
+    "onResponse": {
+      "valueAccessor": "",
+      "valueMap": {
+        "any": {
+          "label": "",
+          "actions": [],
+          "exitPort": "",
+          "exitPortValueMap": {},
+          "exitPortValueAccessor": "",
+          "httpCode": "",
+          "collapsed": false
+        }
+      }
+    }
+  }
+}
