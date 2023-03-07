@@ -1,40 +1,133 @@
 {
+  "api": {
+    "url": "https://dev-api.edifydev.net/v4/interactions/{{source.interactionId}}",
+    "method": "get",
+    "headers": {
+      "u": "{{edify.user.email}}:{{edify.user.apiToken}}",
+      "content-type": "application/json"
+    },
+    "onResponse": {
+      "valueMap": {
+        "200": {
+          "label": "Success",
+          "actions": [
+            {
+              "label": "Set Variables",
+              "action": "set-variables",
+              "config": {
+                "variables": []
+              },
+              "editable": true,
+              "collapsed": false,
+              "supportAddingCustomVariables": true
+            }
+          ],
+          "exitPort": "success",
+          "httpCode": "200",
+          "collapsed": false
+        },
+        "any": {
+          "label": "Fail",
+          "actions": [
+            {
+              "label": "Set Variables",
+              "action": "set-variables",
+              "config": {
+                "variables": [
+                  {
+                    "name": "message",
+                    "value": "$.message"
+                  }
+                ]
+              },
+              "editable": true,
+              "collapsed": false,
+              "supportAddingCustomVariables": true
+            }
+          ],
+          "exitPort": "fail",
+          "httpCode": "any",
+          "collapsed": false
+        }
+      },
+      "valueAccessor": "{{http-status-code}}"
+    }
+  },
   "name": "Get Interaction",
   "sections": [],
-  "exitPorts": [],
+  "exitPorts": [
+    {
+      "name": "success",
+      "label": "Success",
+      "hoverColor": "#3E5A2C",
+      "backgroundColor": "#4F7339"
+    },
+    {
+      "name": "fail",
+      "label": "Failed",
+      "hoverColor": "#527E36",
+      "backgroundColor": "#5D933C"
+    }
+  ],
   "publisher": {
-    "name": "",
-    "website": "",
-    "description": "",
-    "licenseType": ""
+    "name": "Edify Labs, Inc.",
+    "website": "https://edify.cx",
+    "description": "Get the current interaction and store the agent's id along with phone number of outside user",
+    "licenseType": "Example License"
   },
   "formatting": {
     "titleBar": {
-      "icon": "",
-      "backgroundColor": ""
+      "icon": "mobile",
+      "backgroundColor": "#4F7339"
     }
   },
   "moduleVersion": "1.0",
-  "documentVersion": "1.0",
-  "customVariables": [],
-  "api": {
-    "uri": "",
-    "method": "",
-    "header": {},
-    "body": {},
-    "onResponse": {
-      "valueAccessor": "",
-      "valueMap": {
-        "any": {
-          "label": "",
-          "actions": [],
-          "exitPort": "",
-          "exitPortValueMap": {},
-          "exitPortValueAccessor": "",
-          "httpCode": "",
-          "collapsed": false
-        }
-      }
+  "customVariables": [
+    {
+      "name": "User Id",
+      "value": "$.interaction.user.id",
+      "defaultValue": "userId"
+    },
+    {
+      "name": "Phone Number",
+      "value": "$.interaction.sourceDetails.phoneNumber",
+      "defaultValue": "phoneNumber"
+    },
+    {
+      "name": "Email",
+      "value": "$.interaction.sourceDetails.email",
+      "defaultValue": "email"
+    },
+    {
+      "name": "Communication Type",
+      "value": "$.interaction.commType",
+      "defaultValue": "commType"
+    },
+    {
+      "name": "Subcommunication Type",
+      "value": "$.interaction.subCommType",
+      "defaultValue": "subCommType"
+    },
+    {
+      "name": "Status",
+      "value": "$.interaction.status",
+      "defaultValue": "status"
+    },
+    {
+      "name": "Customer Name",
+      "value": "$.interaction.customer.name",
+      "defaultValue": "customerName"
+    },
+    {
+      "name": "Agent Name",
+      "value": "$.interaction.user.fullName",
+      "defaultValue": "agentName"
+    },
+    {
+      "name": "Error Message",
+      "value": "$.message",
+      "defaultValue": "message"
     }
-  }
+  ],
+  "documentVersion": "1.0"
 }
