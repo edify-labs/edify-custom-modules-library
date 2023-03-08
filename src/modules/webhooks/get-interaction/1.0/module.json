@@ -83,11 +83,13 @@
   },
   "moduleVersion": "1.0",
   "customVariables": [
+
     {
       "name": "User Id",
       "value": "$.interaction.user.id",
       "defaultValue": "userId"
     },
+
     {
       "name": "Phone Number",
       "value": "$.interaction.sourceDetails.phoneNumber",
@@ -114,15 +116,140 @@
       "defaultValue": "status"
     },
     {
+      "name": "Subject",
+      "value": "$.interaction.details.subject",
+      "defaultValue": "subject"
+    },
+
+    {
+      "name": "Language Codes",
+      "value": "$.interaction.details.languageCodes",
+      "defaultValue": "languageCodes"
+    },
+    
+    {
       "name": "Customer Name",
       "value": "$.interaction.customer.name",
       "defaultValue": "customerName"
+    },
+    {
+      "name": "Customer Email",
+      "value": "$.interaction.customer.email",
+      "defaultValue": "customerEmail"
+    },
+    {
+      "name": "Customer Phone Number",
+      "value": "$.interaction.customer.phoneNumber.number",
+      "defaultValue": "customerPhoneNumber"
     },
     {
       "name": "Agent Name",
       "value": "$.interaction.user.fullName",
       "defaultValue": "agentName"
     },
+    {
+      "name": "Agent Email",
+      "value": "$.interaction.user.email",
+      "defaultValue": "agentEmail"
+    },
+    {
+      "name": "Agent Time Zone",
+      "value": "$.interaction.user.attributes.time.tz",
+      "defaultValue": "agentTimeZone"
+    },
+  
+    {
+      "name": "Agent Ring Time",
+      "value": "$.interaction.user.attributes.userRingTime",
+      "defaultValue": "agentRingTime"
+    },
+
+    {
+      "name": "Agent Reported Score",
+      "value": "$.interaction.scores.selfScore",
+      "defaultValue": "agentReportedScore"
+    },
+    {
+      "name": "CSAT Score Value",
+      "value": "$.interaction.scores.csat.value",
+      "defaultValue": "csatScoreValue"
+    },
+    {
+      "name": "CSAT Score Comments",
+      "value": "$.interaction.scores.csat.comments",
+      "defaultValue": "csatScoreComments"
+    },
+    {
+      "name": "Overall Sentiment",
+      "value": "$.interaction.scores.sentiment.overall",
+      "defaultValue": "overallSentiment"
+    },
+    {
+      "name": "Agent Sentiment",
+      "value": "$.interaction.scores.sentiment.user.sentiment",
+      "defaultValue": "agentSentiment"
+    },
+    {
+      "name": "Customer Sentiment",
+      "value": "$.interaction.scores.sentiment.customer.sentiment",
+      "defaultValue": "customerSentiment"
+    },
+    {
+      "name": "Customer Sentiment Score",
+      "value": "$.interaction.scores.sentiment.customer.score",
+      "defaultValue": "customerSentimentScore"
+    },
+    {
+      "name": "Start Time",
+      "value": "$.interaction.startTime",
+      "defaultValue": "startTime"
+    },
+    {
+      "name": "End Time",
+      "value": "$.interaction.endTime",
+      "defaultValue": "endTime"
+    },
+    {
+      "name": "Age",
+      "value": "$.interaction.age",
+      "defaultValue": "age"
+    },
+    {
+      "name": "Number Of Transfers",
+      "value": "$.interaction.metrics.numberOfTransfers",
+      "defaultValue": "numberOfTransfers"
+    }, 
+    
+    {
+      "name": "Wait Time",
+      "value": "$.interaction.metrics.waitTime",
+      "defaultValue": "waitTime"
+    }, 
+    {
+      "name": "Hold Time",
+      "value": "$.interaction.metrics.holdTime",
+      "defaultValue": "holdTime"
+    }, 
+    {
+      "name": "Time Interacting",
+      "value": "$.interaction.metrics.timeInteracting",
+      "defaultValue": "timeInteracting"
+    },
+    {
+      "name": "Handle Time",
+      "value": "$.interaction.metrics.handleTime",
+      "defaultValue": "handleTime"
+    }, 
+    {
+      "name": "Wrap-Up Time",
+      "value": "$.interaction.metrics.wrapUpTime",
+      "defaultValue": "wrapUpTime"
+    }, 
+    {
+      "name": "Silence Time",
+      "value": "$.interaction.metrics.silenceTime",
+      "defaultValue": "silenceTime"
+    }, 
     {
       "name": "Error Message",
       "value": "$.message",
