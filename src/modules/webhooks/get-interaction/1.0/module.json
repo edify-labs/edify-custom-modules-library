@@ -164,11 +164,6 @@
       "defaultValue": "detailsLanguageCodes"
     },
     {
-      "name": "Custom Example",
-      "value": "$.interaction.custom.example",
-      "defaultValue": "customExample"
-    },
-    {
       "name": "Source Details Name",
       "value": "$.interaction.sourceDetails.name",
       "defaultValue": "sourceDetailsName"
@@ -939,34 +934,14 @@
       "defaultValue": "maxWaitTime"
     },
     {
-      "name": "Created On",
-      "value": "$.interaction.createdOn",
-      "defaultValue": "createdOn"
-    },
-    {
-      "name": "Created On Unix",
-      "value": "$.interaction.createdOnUnix",
-      "defaultValue": "createdOnUnix"
-    },
-    {
       "name": "Start Time",
       "value": "$.interaction.startTime",
       "defaultValue": "startTime"
     },
     {
-      "name": "Start Time Unix",
-      "value": "$.interaction.startTimeUnix",
-      "defaultValue": "startTimeUnix"
-    },
-    {
       "name": "End Time",
       "value": "$.interaction.endTime",
       "defaultValue": "endTime"
-    },
-    {
-      "name": "End Time Unix",
-      "value": "$.interaction.endTimeUnix",
-      "defaultValue": "endTimeUnix"
     },
     {
       "name": "Age",
