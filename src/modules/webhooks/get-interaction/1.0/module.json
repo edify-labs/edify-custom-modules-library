@@ -94,14 +94,14 @@
       "defaultValue": "initialSubCommunicationType"
     },
     {
-      "name": "Communication Type",
+      "name": "Current Communication Type",
       "value": "$.interaction.commType",
-      "defaultValue": "communicationType"
+      "defaultValue": "currentCommunicationType"
     },
     {
-      "name": "Sub Communication Type",
+      "name": "Current Sub Communication Type",
       "value": "$.interaction.subCommType",
-      "defaultValue": "subCommunicationType"
+      "defaultValue": "currentSubCommunicationType"
     },
     {
       "name": "Completion Type",
@@ -151,7 +151,7 @@
     {
       "name": "Language Codes",
       "value": "$.interaction.details.languageCodes",
-      "defaultValue": "detailsLanguageCodes"
+      "defaultValue": "languageCodes"
     },
     {
       "name": "Source Name",
@@ -234,7 +234,7 @@
       "defaultValue": "sourcePhoneNumberType"
     },
     {
-      "name": "Source Phone Number  Number Type",
+      "name": "Source Phone Number Number Type",
       "value": "$.interaction.sourceDetails.phoneNumberFormatted.numberType",
       "defaultValue": "sourcePhoneNumberNumberType"
     },
@@ -301,52 +301,53 @@
     {
       "name": "Routing Phone Number Number Type",
       "value": "$.interaction.routingDetails.phoneNumberFormatted.numberType",
-      "defaultValue": "routingPhoneNumberFormattedNumberType"
+      "defaultValue": "routingPhoneNumberNumberType"
     },
     {
-      "name": "Routing Phone Number Formatted Country Calling Code",
+      "name": "Routing Phone Number Country Calling Code",
       "value": "$.interaction.routingDetails.phoneNumberFormatted.countryCallingCode",
-      "defaultValue": "routingPhoneNumberFormattedCountryCallingCode"
+      "defaultValue": "routingPhoneNumberCountryCallingCode"
     },
     {
-      "name": "Routing Phone Number Formatted National Number",
+      "name": "Routing Phone Number National Number",
       "value": "$.interaction.routingDetails.phoneNumberFormatted.nationalNumber",
-      "defaultValue": "routingPhoneNumberFormattedNationalNumber"
+      "defaultValue": "routingPhoneNumberNationalNumber"
     },
     {
-      "name": "Routing Phone Number Formatted Number",
+      "name": "Routing Phone Number Number",
       "value": "$.interaction.routingDetails.phoneNumberFormatted.number",
-      "defaultValue": "routingPhoneNumberFormattedNumber"
+      "defaultValue": "routingPhoneNumberNumber"
     },
     {
-      "name": "Routing Phone Number Formatted Country",
+      "name": "Routing Phone Number Country",
       "value": "$.interaction.routingDetails.phoneNumberFormatted.country",
-      "defaultValue": "routingPhoneNumberFormattedCountry"
+      "defaultValue": "routingPhoneNumberCountry"
     },
     {
-      "name": "Routing Phone Number Formatted Area Code",
+      "name": "Routing Phone Number Area Code",
       "value": "$.interaction.routingDetails.phoneNumberFormatted.numberParts.areaCode",
-      "defaultValue": "routingPhoneNumberFormattedAreaCode"
+      "defaultValue": "routingPhoneNumberAreaCode"
     },
     {
-      "name": "Routing Phone Number Formatted Exchange",
+      "name": "Routing Phone Number Exchange",
       "value": "$.interaction.routingDetails.phoneNumberFormatted.numberParts.exchange",
-      "defaultValue": "routingPhoneNumberFormattedExchange"
+      "defaultValue": "routingPhoneNumberExchange"
     },
     {
-      "name": "Routing Phone Number Formatted Last Four",
+      "name": "Routing Phone Number Last Four",
       "value": "$.interaction.routingDetails.phoneNumberFormatted.numberParts.lastFour",
-      "defaultValue": "routingPhoneNumberFormattedLastFour"
+      "defaultValue": "routingPhoneNumberLastFour"
     },
+   
     {
-      "name": "Routing Phone Number Formatted Formatted International",
+      "name": "Routing Phone Number International Format",
       "value": "$.interaction.routingDetails.phoneNumberFormatted.formatted.international",
-      "defaultValue": "routingPhoneNumberFormattedFormattedInternational"
+      "defaultValue": "routingPhoneNumberInternationalFormat"
     },
     {
-      "name": "Routing Phone Number Formatted Formatted National",
+      "name": "Routing Phone Number National Format",
       "value": "$.interaction.routingDetails.phoneNumberFormatted.formatted.national",
-      "defaultValue": "routingPhoneNumberFormattedFormattedNational"
+      "defaultValue": "routingPhoneNumberNationalFormat"
     },
     {
       "name": "Points",
@@ -374,14 +375,14 @@
       "defaultValue": "customerUniqueId"
     },
     {
-      "name": "Customer Live Trancription Transcribed",
+      "name": "Is Customer Live Transcribed",
       "value": "$.interaction.customer.liveTrancription.transcribed",
-      "defaultValue": "customerLiveTrancriptionTranscribed"
+      "defaultValue": "isCustomerLiveTranscribed"
     },
     {
-      "name": "Customer Live Trancription Active",
+      "name": "Is Customer Live Transcription Active",
       "value": "$.interaction.customer.liveTrancription.active",
-      "defaultValue": "customerLiveTrancriptionActive"
+      "defaultValue": "isCustomerLiveTrancriptionActive"
     },
     {
       "name": "Customer Name",
@@ -515,14 +516,14 @@
       "defaultValue": "userChannel"
     },
     {
-      "name": "User Live Trancription Transcribed",
+      "name": "Is User Live Transcribed",
       "value": "$.interaction.user.liveTrancription.transcribed",
-      "defaultValue": "userLiveTrancriptionTranscribed"
+      "defaultValue": "isUserLiveTranscribed"
     },
     {
-      "name": "User Live Trancription Active",
+      "name": "Is User Live Transcription Active",
       "value": "$.interaction.user.liveTrancription.active",
-      "defaultValue": "userLiveTrancriptionActive"
+      "defaultValue": "isUserLiveTrancriptionActive"
     },
     {
       "name": "User Extension",
@@ -530,19 +531,19 @@
       "defaultValue": "userExtension"
     },
     {
-      "name": "User Status Voip Status",
+      "name": "User Voip Status",
       "value": "$.interaction.user.status.voipStatus",
-      "defaultValue": "userStatusVoipStatus"
+      "defaultValue": "userVoipStatus"
     },
     {
-      "name": "User Status Status Type",
+      "name": "User Status Type",
       "value": "$.interaction.user.status.statusType",
-      "defaultValue": "userStatusStatusType"
+      "defaultValue": "userStatusType"
     },
     {
-      "name": "User Status Status",
+      "name": "User Status",
       "value": "$.interaction.user.status.status",
-      "defaultValue": "userStatusStatus"
+      "defaultValue": "userStatus"
     },
     {
       "name": "Is User AID Status",
@@ -638,56 +639,6 @@
       "name": "Is AID Calculated",
       "value": "$.interaction.isAIDCalculated",
       "defaultValue": "isAIDCalculated"
-    },
-    {
-      "name": "Transfer Is Transfer",
-      "value": "$.interaction.transfer.isTransfer",
-      "defaultValue": "transferIsTransfer"
-    },
-    {
-      "name": "Transfer Transfer Answer",
-      "value": "$.interaction.transfer.transferAnswer",
-      "defaultValue": "transferTransferAnswer"
-    },
-    {
-      "name": "Transfer Transfer Warm",
-      "value": "$.interaction.transfer.transferWarm",
-      "defaultValue": "transferTransferWarm"
-    },
-    {
-      "name": "Transfer Is Attended Transfer",
-      "value": "$.interaction.transfer.isAttendedTransfer",
-      "defaultValue": "transferIsAttendedTransfer"
-    },
-    {
-      "name": "Transfer Is Blind Transfer",
-      "value": "$.interaction.transfer.isBlindTransfer",
-      "defaultValue": "transferIsBlindTransfer"
-    },
-    {
-      "name": "Transfer Is External Transfer",
-      "value": "$.interaction.transfer.isExternalTransfer",
-      "defaultValue": "transferIsExternalTransfer"
-    },
-    {
-      "name": "Transfer External Transfer Answer",
-      "value": "$.interaction.transfer.externalTransferAnswer",
-      "defaultValue": "transferExternalTransferAnswer"
-    },
-    {
-      "name": "Transfer External Transfer Warm",
-      "value": "$.interaction.transfer.externalTransferWarm",
-      "defaultValue": "transferExternalTransferWarm"
-    },
-    {
-      "name": "Transfer External Transfer To",
-      "value": "$.interaction.transfer.externalTransferTo",
-      "defaultValue": "transferExternalTransferTo"
-    },
-    {
-      "name": "Transfer Channel",
-      "value": "$.interaction.transfer.channel",
-      "defaultValue": "transferChannel"
     },
     {
       "name": "Is Recording",
@@ -835,8 +786,6 @@
       "value": "$.interaction.queue.details.liveTranscriptionCustomer",
       "defaultValue": "queueLiveTranscribeCustomerEnabled"
     },
-
-
     {
       "name": "Next Trigger Time",
       "value": "$.interaction.nextTrigger.time",
@@ -873,89 +822,89 @@
       "defaultValue": "age"
     },
     {
-      "name": "Status Updated At",
+      "name": "Status Last Updated At",
       "value": "$.interaction.statusUpdatedAt",
-      "defaultValue": "statusUpdatedAt"
+      "defaultValue": "statusLastUpdatedAt"
     },
     {
-      "name": "Metrics Number Of Transfers",
+      "name": "Number Of Transfers",
       "value": "$.interaction.metrics.numberOfTransfers",
-      "defaultValue": "metricsNumberOfTransfers"
+      "defaultValue": "numberOfTransfers"
     },
     {
-      "name": "Metrics Wait Time",
+      "name": "Wait Time",
       "value": "$.interaction.metrics.waitTime",
-      "defaultValue": "metricsWaitTime"
+      "defaultValue": "waitTime"
     },
     {
-      "name": "Metrics Hold Time",
+      "name": "Hold Time",
       "value": "$.interaction.metrics.holdTime",
-      "defaultValue": "metricsHoldTime"
+      "defaultValue": "holdTime"
     },
     {
-      "name": "Metrics Time Interacting",
+      "name": "Time Interacting",
       "value": "$.interaction.metrics.timeInteracting",
-      "defaultValue": "metricsTimeInteracting"
+      "defaultValue": "timeInteracting"
     },
     {
-      "name": "Metrics Handle Time",
+      "name": "Handle Time",
       "value": "$.interaction.metrics.handleTime",
-      "defaultValue": "metricsHandleTime"
+      "defaultValue": "handleTime"
     },
     {
-      "name": "Metrics Wrap Up Time",
+      "name": "Wrap Up Time",
       "value": "$.interaction.metrics.wrapUpTime",
-      "defaultValue": "metricsWrapUpTime"
+      "defaultValue": "wrapUpTime"
     },
     {
-      "name": "Metrics Silence Time",
+      "name": "Silence Time",
       "value": "$.interaction.metrics.silenceTime",
-      "defaultValue": "metricsSilenceTime"
+      "defaultValue": "silenceTime"
     },
     {
-      "name": "Scores Overall",
+      "name": "Overall Score",
       "value": "$.interaction.scores.overall",
-      "defaultValue": "scoresOverall"
+      "defaultValue": "overallScore"
     },
     {
-      "name": "Scores Self Score",
+      "name": "Self Score",
       "value": "$.interaction.scores.selfScore",
-      "defaultValue": "scoresSelfScore"
+      "defaultValue": "selfScore"
     },
     {
-      "name": "Scores Csat Value",
+      "name": "Csat Value",
       "value": "$.interaction.scores.csat.value",
-      "defaultValue": "scoresCsatValue"
+      "defaultValue": "csatValue"
     },
     {
-      "name": "Scores Csat Comments",
+      "name": "Csat Comments",
       "value": "$.interaction.scores.csat.comments",
-      "defaultValue": "scoresCsatComments"
+      "defaultValue": "csatComments"
     },
     {
-      "name": "Scores Sentiment Overall",
+      "name": "Overall Sentiment",
       "value": "$.interaction.scores.sentiment.overall",
-      "defaultValue": "scoresSentimentOverall"
+      "defaultValue": "overallSentiment"
     },
     {
-      "name": "Scores Sentiment User Reported",
+      "name": "User Reported Sentiment",
       "value": "$.interaction.scores.sentiment.userReported",
-      "defaultValue": "scoresSentimentUserReported"
+      "defaultValue": "userReportedSentiment"
     },
     {
-      "name": "Scores Sentiment User Sentiment",
+      "name": "User Sentiment",
       "value": "$.interaction.scores.sentiment.user.sentiment",
-      "defaultValue": "scoresSentimentUserSentiment"
+      "defaultValue": "userSentiment"
     },
     {
-      "name": "Scores Sentiment Customer Sentiment",
+      "name": "Customer Sentiment",
       "value": "$.interaction.scores.sentiment.customer.sentiment",
-      "defaultValue": "scoresSentimentCustomerSentiment"
+      "defaultValue": "customerSentiment"
     },
     {
-      "name": "Scores Sentiment Customer Score",
+      "name": "Customer Score",
       "value": "$.interaction.scores.sentiment.customer.score",
-      "defaultValue": "scoresSentimentCustomerScore"
+      "defaultValue": "customerScore"
     },
     {
       "name": "Server Name",
