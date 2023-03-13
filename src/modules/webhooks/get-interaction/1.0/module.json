@@ -1,40 +1,927 @@
 {
+  "api": {
+    "url": "https://dev-api.edifydev.net/v4/interactions/{{source.interactionId}}",
+    "method": "get",
+    "headers": {
+      "u": "{{edify.user.email}}:{{edify.user.apiToken}}",
+      "content-type": "application/json"
+    },
+    "onResponse": {
+      "valueMap": {
+        "200": {
+          "label": "Success",
+          "actions": [
+            {
+              "label": "Set Variables",
+              "action": "set-variables",
+              "config": {
+                "variables": []
+              },
+              "editable": true,
+              "collapsed": false,
+              "supportAddingCustomVariables": true
+            }
+          ],
+          "exitPort": "success",
+          "httpCode": "200",
+          "collapsed": false
+        },
+        "any": {
+          "label": "Fail",
+          "actions": [
+            {
+              "label": "Set Variables",
+              "action": "set-variables",
+              "config": {
+                "variables": []
+              },
+              "editable": true,
+              "collapsed": false,
+              "supportAddingCustomVariables": true
+            }
+          ],
+          "exitPort": "fail",
+          "httpCode": "any",
+          "collapsed": false
+        }
+      },
+      "valueAccessor": "{{http-status-code}}"
+    }
+  },
   "name": "Get Interaction",
   "sections": [],
-  "exitPorts": [],
+  "exitPorts": [
+    {
+      "name": "success",
+      "label": "Success",
+      "hoverColor": "#3E5A2C",
+      "backgroundColor": "#4F7339"
+    },
+    {
+      "name": "fail",
+      "label": "Failed",
+      "hoverColor": "#527E36",
+      "backgroundColor": "#5D933C"
+    }
+  ],
   "publisher": {
-    "name": "",
-    "website": "",
-    "description": "",
-    "licenseType": ""
+    "name": "Edify Labs, Inc.",
+    "website": "https://edify.cx",
+    "description": "Get the current interaction and store the agent's id along with phone number of outside user",
+    "licenseType": "Example License"
   },
   "formatting": {
     "titleBar": {
-      "icon": "",
-      "backgroundColor": ""
+      "icon": "mobile",
+      "backgroundColor": "#4F7339"
     }
   },
   "moduleVersion": "1.0",
-  "documentVersion": "1.0",
-  "customVariables": [],
-  "api": {
-    "uri": "",
-    "method": "",
-    "header": {},
-    "body": {},
-    "onResponse": {
-      "valueAccessor": "",
-      "valueMap": {
-        "any": {
-          "label": "",
-          "actions": [],
-          "exitPort": "",
-          "exitPortValueMap": {},
-          "exitPortValueAccessor": "",
-          "httpCode": "",
-          "collapsed": false
-        }
-      }
+  "customVariables": [
+    {
+      "name": "Status",
+      "value": "$.interaction.status",
+      "defaultValue": "status"
+    },
+    {
+      "name": "Interaction Id",
+      "value": "$.interaction.id",
+      "defaultValue": "id"
+    },
+    {
+      "name": "Current Communication Type",
+      "value": "$.interaction.commType",
+      "defaultValue": "currentCommunicationType"
+    },
+    {
+      "name": "Current Sub Communication Type",
+      "value": "$.interaction.subCommType",
+      "defaultValue": "currentSubCommunicationType"
+    },
+    {
+      "name": "Initial Communication Type",
+      "value": "$.interaction.initialCommType",
+      "defaultValue": "initialCommunicationType"
+    },
+    {
+      "name": "Initial Sub Communication Type",
+      "value": "$.interaction.initialSubCommType",
+      "defaultValue": "initialSubCommunicationType"
+    },
+  
+    {
+      "name": "Completion Type",
+      "value": "$.interaction.completion.type",
+      "defaultValue": "completionType"
+    },
+    {
+      "name": "Completion Value",
+      "value": "$.interaction.completion.value",
+      "defaultValue": "completionValue"
+    },
+    {
+      "name": "Completion Display Name",
+      "value": "$.interaction.completion.displayName",
+      "defaultValue": "completionDisplayName"
+    },
+    {
+      "name": "Completion Time Unix",
+      "value": "$.interaction.completion.timeUnix",
+      "defaultValue": "completionTimeUnix"
+    },
+    {
+      "name": "Is Abandoned",
+      "value": "$.interaction.isAbandoned",
+      "defaultValue": "isAbandoned"
+    },
+    {
+      "name": "Is Max Wait",
+      "value": "$.interaction.isMaxWait",
+      "defaultValue": "isMaxWait"
+    },
+    {
+      "name": "Is Completed",
+      "value": "$.interaction.isCompleted",
+      "defaultValue": "isCompleted"
+    },
+    {
+      "name": "Subject",
+      "value": "$.interaction.details.subject",
+      "defaultValue": "subject"
+    },
+    {
+      "name": "Language Codes",
+      "value": "$.interaction.details.languageCodes",
+      "defaultValue": "languageCodes"
+    },
+    {
+      "name": "Source Name",
+      "value": "$.interaction.sourceDetails.name",
+      "defaultValue": "sourceName"
+    },
+    {
+      "name": "Source Email",
+      "value": "$.interaction.sourceDetails.email",
+      "defaultValue": "sourceEmail"
+    },
+    {
+      "name": "Source Person Sms Device Id",
+      "value": "$.interaction.sourceDetails.person.sms.deviceId",
+      "defaultValue": "sourcePersonSmsDeviceId"
+    },
+    {
+      "name": "Source Person Sms Person Id",
+      "value": "$.interaction.sourceDetails.person.sms.personId",
+      "defaultValue": "sourcePersonSmsPersonId"
+    },
+    {
+      "name": "Source Person Sms Session Id",
+      "value": "$.interaction.sourceDetails.person.sms.sessionId",
+      "defaultValue": "sourcePersonSmsSessionId"
+    },
+    {
+      "name": "Source Person Sms Phone Number",
+      "value": "$.interaction.sourceDetails.person.sms.phoneNumber",
+      "defaultValue": "sourcePersonSmsPhoneNumber"
+    },
+    {
+      "name": "Source Person Phone Device Id",
+      "value": "$.interaction.sourceDetails.person.phone.deviceId",
+      "defaultValue": "sourcePersonPhoneDeviceId"
+    },
+    {
+      "name": "Source Person Phone Person Id",
+      "value": "$.interaction.sourceDetails.person.phone.personId",
+      "defaultValue": "sourcePersonPhonePersonId"
+    },
+    {
+      "name": "Source Person Phone Session Id",
+      "value": "$.interaction.sourceDetails.person.phone.sessionId",
+      "defaultValue": "sourcePersonPhoneSessionId"
+    },
+    {
+      "name": "Source Person Phone Phone Number",
+      "value": "$.interaction.sourceDetails.person.phone.phoneNumber",
+      "defaultValue": "sourcePersonPhonePhoneNumber"
+    },
+    {
+      "name": "Source Person Device Id",
+      "value": "$.interaction.sourceDetails.person.deviceId",
+      "defaultValue": "sourcePersonDeviceId"
+    },
+    {
+      "name": "Source Person Person Id",
+      "value": "$.interaction.sourceDetails.person.personId",
+      "defaultValue": "sourcePersonPersonId"
+    },
+    {
+      "name": "Source Person Session Id",
+      "value": "$.interaction.sourceDetails.person.sessionId",
+      "defaultValue": "sourcePersonSessionId"
+    },
+    {
+      "name": "Source Person Phone Number",
+      "value": "$.interaction.sourceDetails.person.phoneNumber",
+      "defaultValue": "sourcePersonPhoneNumber"
+    },
+    {
+      "name": "Source Phone Number",
+      "value": "$.interaction.sourceDetails.phoneNumber",
+      "defaultValue": "sourcePhoneNumber"
+    },
+    {
+      "name": "Source Phone Number Type",
+      "value": "$.interaction.sourceDetails.phoneNumberFormatted.type",
+      "defaultValue": "sourcePhoneNumberType"
+    },
+    {
+      "name": "Source Phone Number Number Type",
+      "value": "$.interaction.sourceDetails.phoneNumberFormatted.numberType",
+      "defaultValue": "sourcePhoneNumberNumberType"
+    },
+    {
+      "name": "Source Phone Number Country Calling Code",
+      "value": "$.interaction.sourceDetails.phoneNumberFormatted.countryCallingCode",
+      "defaultValue": "sourcePhoneNumberCountryCallingCode"
+    },
+    {
+      "name": "Source Phone Number National Number",
+      "value": "$.interaction.sourceDetails.phoneNumberFormatted.nationalNumber",
+      "defaultValue": "sourcePhoneNumberNationalNumber"
+    },
+    {
+      "name": "Source Phone Number Number",
+      "value": "$.interaction.sourceDetails.phoneNumberFormatted.number",
+      "defaultValue": "sourcePhoneNumberNumber"
+    },
+    {
+      "name": "Source Phone Number Country",
+      "value": "$.interaction.sourceDetails.phoneNumberFormatted.country",
+      "defaultValue": "sourcePhoneNumberCountry"
+    },
+    {
+      "name": "Source Phone Number Area Code",
+      "value": "$.interaction.sourceDetails.phoneNumberFormatted.numberParts.areaCode",
+      "defaultValue": "sourcePhoneNumberAreaCode"
+    },
+    {
+      "name": "Source Phone Number Exchange",
+      "value": "$.interaction.sourceDetails.phoneNumberFormatted.numberParts.exchange",
+      "defaultValue": "sourcePhoneNumberExchange"
+    },
+    {
+      "name": "Source Phone Number Last Four",
+      "value": "$.interaction.sourceDetails.phoneNumberFormatted.numberParts.lastFour",
+      "defaultValue": "sourcePhoneNumberLastFour"
+    },
+    {
+      "name": "Source Phone Number International Format",
+      "value": "$.interaction.sourceDetails.phoneNumberFormatted.formatted.international",
+      "defaultValue": "sourcePhoneNumberInternationalFormat"
+    },
+    {
+      "name": "Source Phone Number National Format",
+      "value": "$.interaction.sourceDetails.phoneNumberFormatted.formatted.national",
+      "defaultValue": "sourcePhoneNumberNationalFormat"
+    },
+    {
+      "name": "Linked Ids Edify Person Sessions",
+      "value": "$.interaction.linkedIds.edify.personSessions",
+      "defaultValue": "linkedIdsEdifyPersonSessions"
+    },
+    {
+      "name": "Routing Phone Number",
+      "value": "$.interaction.routingDetails.phoneNumber",
+      "defaultValue": "routingPhoneNumber"
+    },
+    {
+      "name": "Routing Phone Number Type",
+      "value": "$.interaction.routingDetails.phoneNumberFormatted.type",
+      "defaultValue": "routingPhoneNumberType"
+    },
+    {
+      "name": "Routing Phone Number Number Type",
+      "value": "$.interaction.routingDetails.phoneNumberFormatted.numberType",
+      "defaultValue": "routingPhoneNumberNumberType"
+    },
+    {
+      "name": "Routing Phone Number Country Calling Code",
+      "value": "$.interaction.routingDetails.phoneNumberFormatted.countryCallingCode",
+      "defaultValue": "routingPhoneNumberCountryCallingCode"
+    },
+    {
+      "name": "Routing Phone Number National Number",
+      "value": "$.interaction.routingDetails.phoneNumberFormatted.nationalNumber",
+      "defaultValue": "routingPhoneNumberNationalNumber"
+    },
+    {
+      "name": "Routing Phone Number Number",
+      "value": "$.interaction.routingDetails.phoneNumberFormatted.number",
+      "defaultValue": "routingPhoneNumberNumber"
+    },
+    {
+      "name": "Routing Phone Number Country",
+      "value": "$.interaction.routingDetails.phoneNumberFormatted.country",
+      "defaultValue": "routingPhoneNumberCountry"
+    },
+    {
+      "name": "Routing Phone Number Area Code",
+      "value": "$.interaction.routingDetails.phoneNumberFormatted.numberParts.areaCode",
+      "defaultValue": "routingPhoneNumberAreaCode"
+    },
+    {
+      "name": "Routing Phone Number Exchange",
+      "value": "$.interaction.routingDetails.phoneNumberFormatted.numberParts.exchange",
+      "defaultValue": "routingPhoneNumberExchange"
+    },
+    {
+      "name": "Routing Phone Number Last Four",
+      "value": "$.interaction.routingDetails.phoneNumberFormatted.numberParts.lastFour",
+      "defaultValue": "routingPhoneNumberLastFour"
+    },
+   
+    {
+      "name": "Routing Phone Number International Format",
+      "value": "$.interaction.routingDetails.phoneNumberFormatted.formatted.international",
+      "defaultValue": "routingPhoneNumberInternationalFormat"
+    },
+    {
+      "name": "Routing Phone Number National Format",
+      "value": "$.interaction.routingDetails.phoneNumberFormatted.formatted.national",
+      "defaultValue": "routingPhoneNumberNationalFormat"
+    },
+    {
+      "name": "Points",
+      "value": "$.interaction.points",
+      "defaultValue": "points"
+    },
+    {
+      "name": "Tags",
+      "value": "$.interaction.tags",
+      "defaultValue": "tags"
+    },
+    {
+      "name": "Customer Language Code",
+      "value": "$.interaction.customer.languageCode",
+      "defaultValue": "customerLanguageCode"
+    },
+    {
+      "name": "Customer Channel",
+      "value": "$.interaction.customer.channel",
+      "defaultValue": "customerChannel"
+    },
+    {
+      "name": "Customer Unique Id",
+      "value": "$.interaction.customer.uniqueId",
+      "defaultValue": "customerUniqueId"
+    },
+    {
+      "name": "Is Customer Live Transcribed",
+      "value": "$.interaction.customer.liveTrancription.transcribed",
+      "defaultValue": "isCustomerLiveTranscribed"
+    },
+    {
+      "name": "Is Customer Live Transcription Active",
+      "value": "$.interaction.customer.liveTrancription.active",
+      "defaultValue": "isCustomerLiveTrancriptionActive"
+    },
+    {
+      "name": "Customer Name",
+      "value": "$.interaction.customer.name",
+      "defaultValue": "customerName"
+    },
+    {
+      "name": "Customer Email",
+      "value": "$.interaction.customer.email",
+      "defaultValue": "customerEmail"
+    },
+    {
+      "name": "Customer Phone Number Type",
+      "value": "$.interaction.customer.phoneNumber.type",
+      "defaultValue": "customerPhoneNumberType"
+    },
+    {
+      "name": "Customer Phone Number Number Type",
+      "value": "$.interaction.customer.phoneNumber.numberType",
+      "defaultValue": "customerPhoneNumberNumberType"
+    },
+    {
+      "name": "Customer Phone Number Country Calling Code",
+      "value": "$.interaction.customer.phoneNumber.countryCallingCode",
+      "defaultValue": "customerPhoneNumberCountryCallingCode"
+    },
+ 
+    {
+      "name": "Customer Phone Number",
+      "value": "$.interaction.customer.phoneNumber.number",
+      "defaultValue": "customerPhoneNumber"
+    },
+    {
+      "name": "Customer Phone Number Country",
+      "value": "$.interaction.customer.phoneNumber.country",
+      "defaultValue": "customerPhoneNumberCountry"
+    },
+    {
+      "name": "Customer Phone Area Code",
+      "value": "$.interaction.customer.phoneNumber.numberParts.areaCode",
+      "defaultValue": "customerPhoneAreaCode"
+    },
+    {
+      "name": "Customer Phone Exchange",
+      "value": "$.interaction.customer.phoneNumber.numberParts.exchange",
+      "defaultValue": "customerPhoneExchange"
+    },
+    {
+      "name": "Customer Phone Last Four",
+      "value": "$.interaction.customer.phoneNumber.numberParts.lastFour",
+      "defaultValue": "customerPhoneLastFour"
+    },
+    {
+      "name": "Customer Phone International Format",
+      "value": "$.interaction.customer.phoneNumber.formatted.international",
+      "defaultValue": "customerPhoneInternationalFormat"
+    },
+    {
+      "name": "Customer Phone National Format",
+      "value": "$.interaction.customer.phoneNumber.formatted.national",
+      "defaultValue": "customerPhoneNationalFormat"
+    },
+    {
+      "name": "Person Sms Device Id",
+      "value": "$.interaction.person.sms.deviceId",
+      "defaultValue": "personSmsDeviceId"
+    },
+    {
+      "name": "Person Sms Person Id",
+      "value": "$.interaction.person.sms.personId",
+      "defaultValue": "personSmsPersonId"
+    },
+    {
+      "name": "Person Sms Session Id",
+      "value": "$.interaction.person.sms.sessionId",
+      "defaultValue": "personSmsSessionId"
+    },
+    {
+      "name": "Person Sms Phone Number",
+      "value": "$.interaction.person.sms.phoneNumber",
+      "defaultValue": "personSmsPhoneNumber"
+    },
+    {
+      "name": "Person Phone Device Id",
+      "value": "$.interaction.person.phone.deviceId",
+      "defaultValue": "personPhoneDeviceId"
+    },
+    {
+      "name": "Person Phone Person Id",
+      "value": "$.interaction.person.phone.personId",
+      "defaultValue": "personPhonePersonId"
+    },
+    {
+      "name": "Person Phone Session Id",
+      "value": "$.interaction.person.phone.sessionId",
+      "defaultValue": "personPhoneSessionId"
+    },
+    {
+      "name": "Person Phone Phone Number",
+      "value": "$.interaction.person.phone.phoneNumber",
+      "defaultValue": "personPhonePhoneNumber"
+    },
+    {
+      "name": "Person Device Id",
+      "value": "$.interaction.person.deviceId",
+      "defaultValue": "personDeviceId"
+    },
+    {
+      "name": "Person Person Id",
+      "value": "$.interaction.person.personId",
+      "defaultValue": "personPersonId"
+    },
+    {
+      "name": "Person Session Id",
+      "value": "$.interaction.person.sessionId",
+      "defaultValue": "personSessionId"
+    },
+    {
+      "name": "Person Phone Number",
+      "value": "$.interaction.person.phoneNumber",
+      "defaultValue": "personPhoneNumber"
+    },
+    {
+      "name": "User Id",
+      "value": "$.interaction.user.id",
+      "defaultValue": "userId"
+    },
+    {
+      "name": "User Channel",
+      "value": "$.interaction.user.channel",
+      "defaultValue": "userChannel"
+    },
+    {
+      "name": "Is User Live Transcribed",
+      "value": "$.interaction.user.liveTrancription.transcribed",
+      "defaultValue": "isUserLiveTranscribed"
+    },
+    {
+      "name": "Is User Live Transcription Active",
+      "value": "$.interaction.user.liveTrancription.active",
+      "defaultValue": "isUserLiveTrancriptionActive"
+    },
+    {
+      "name": "User Extension",
+      "value": "$.interaction.user.extension",
+      "defaultValue": "userExtension"
+    },
+    {
+      "name": "User Voip Status",
+      "value": "$.interaction.user.status.voipStatus",
+      "defaultValue": "userVoipStatus"
+    },
+    {
+      "name": "User Status Type",
+      "value": "$.interaction.user.status.statusType",
+      "defaultValue": "userStatusType"
+    },
+    {
+      "name": "User Status",
+      "value": "$.interaction.user.status.status",
+      "defaultValue": "userStatus"
+    },
+    {
+      "name": "Is User AID Status",
+      "value": "$.interaction.user.status.isAID",
+      "defaultValue": "isUserAIDStatus"
+    },
+    {
+      "name": "Is User AIDable",
+      "value": "$.interaction.user.AIDable",
+      "defaultValue": "isUserAIDable"
+    },
+    {
+      "name": "User Name Prefix",
+      "value": "$.interaction.user.namePrefix",
+      "defaultValue": "userNamePrefix"
+    },
+    {
+      "name": "User First Name",
+      "value": "$.interaction.user.firstName",
+      "defaultValue": "userFirstName"
+    },
+    {
+      "name": "User Last Name",
+      "value": "$.interaction.user.lastName",
+      "defaultValue": "userLastName"
+    },
+    {
+      "name": "User Title",
+      "value": "$.interaction.user.title",
+      "defaultValue": "userTitle"
+    },
+    {
+      "name": "User Email",
+      "value": "$.interaction.user.email",
+      "defaultValue": "userEmail"
+    },
+    {
+      "name": "User Full Name",
+      "value": "$.interaction.user.fullName",
+      "defaultValue": "userFullName"
+    },
+    {
+      "name": "Related Users",
+      "value": "$.interaction.relatedUsers",
+      "defaultValue": "relatedUsers"
+    },
+    {
+      "name": "Is Mute",
+      "value": "$.interaction.isMute",
+      "defaultValue": "isMute"
+    },
+    {
+      "name": "Is Audio",
+      "value": "$.interaction.isAudio",
+      "defaultValue": "isAudio"
+    },
+    {
+      "name": "Is Video",
+      "value": "$.interaction.isVideo",
+      "defaultValue": "isVideo"
+    },
+    {
+      "name": "Is Hold",
+      "value": "$.interaction.isHold",
+      "defaultValue": "isHold"
+    },
+    {
+      "name": "Is Callback",
+      "value": "$.interaction.isCallback",
+      "defaultValue": "isCallback"
+    },
+    {
+      "name": "Is Bot",
+      "value": "$.interaction.isBot",
+      "defaultValue": "isBot"
+    },
+    {
+      "name": "Is Exit No Agents",
+      "value": "$.interaction.isExitNoAgents",
+      "defaultValue": "isExitNoAgents"
+    },
+    {
+      "name": "Is Ripable",
+      "value": "$.interaction.isRipable",
+      "defaultValue": "isRipable"
+    },
+    {
+      "name": "Is AID",
+      "value": "$.interaction.isAID",
+      "defaultValue": "isAID"
+    },
+    {
+      "name": "Is AID Calculated",
+      "value": "$.interaction.isAIDCalculated",
+      "defaultValue": "isAIDCalculated"
+    },
+    {
+      "name": "Is Recording",
+      "value": "$.interaction.recording.isRecording",
+      "defaultValue": "isRecording"
+    },
+    {
+      "name": "Is Recorded",
+      "value": "$.interaction.recording.isRecorded",
+      "defaultValue": "isRecorded"
+    },
+    {
+      "name": "Is Recording Muted",
+      "value": "$.interaction.recording.isMuted",
+      "defaultValue": "isRecordingMuted"
+    },
+    {
+      "name": "Recording Direction",
+      "value": "$.interaction.recording.direction",
+      "defaultValue": "recordingDirection"
+    },
+    {
+      "name": "Queue Id",
+      "value": "$.interaction.queue.id",
+      "defaultValue": "queueId"
+    },
+    {
+      "name": "Queue Name",
+      "value": "$.interaction.queue.name",
+      "defaultValue": "queueName"
+    },
+    {
+      "name": "Queue Weight",
+      "value": "$.interaction.queue.weight",
+      "defaultValue": "queueWeight"
+    },
+    {
+      "name": "Queue Timezone",
+      "value": "$.interaction.queue.timezone",
+      "defaultValue": "queueTimezone"
+    },
+    {
+      "name": "Queue Routing Method",
+      "value": "$.interaction.queue.routingMethod",
+      "defaultValue": "queueRoutingMethod"
+    },
+    {
+      "name": "Queue Max Wait Phone Length",
+      "value": "$.interaction.queue.details.maxWait.phone.length",
+      "defaultValue": "queueMaxWaitPhoneLength"
+    },
+    {
+      "name": "Queue Max Wait Phone Status",
+      "value": "$.interaction.queue.details.maxWait.phone.status",
+      "defaultValue": "queueMaxWaitPhoneStatus"
+    },
+    {
+      "name": "Queue Max Wait Phone Route To",
+      "value": "$.interaction.queue.details.maxWait.phone.routeTo",
+      "defaultValue": "queueMaxWaitPhoneRouteTo"
+    },
+    {
+      "name": "Queue Max Wait Phone Route Data",
+      "value": "$.interaction.queue.details.maxWait.phone.routeData",
+      "defaultValue": "queueMaxWaitPhoneRouteData"
+    },
+    {
+      "name": "Queue Max Wait Message Length",
+      "value": "$.interaction.queue.details.maxWait.message.length",
+      "defaultValue": "queueMaxWaitMessageLength"
+    },
+    {
+      "name": "Queue Max Wait Message Status",
+      "value": "$.interaction.queue.details.maxWait.message.status",
+      "defaultValue": "queueMaxWaitMessageStatus"
+    },
+    {
+      "name": "Queue Max Wait Message Route To",
+      "value": "$.interaction.queue.details.maxWait.message.routeTo",
+      "defaultValue": "queueMaxWaitMessageRouteTo"
+    },
+    {
+      "name": "Queue Max Wait Message Route Data",
+      "value": "$.interaction.queue.details.maxWait.message.routeData",
+      "defaultValue": "queueMaxWaitMessageRouteData"
+    },
+    {
+      "name": "Queue Recording Direction",
+      "value": "$.interaction.queue.details.recording.direction",
+      "defaultValue": "queueRecordingDirection"
+    },
+    {
+      "name": "Queue Recording Permissions Agent",
+      "value": "$.interaction.queue.details.recording.permissions.agent",
+      "defaultValue": "queueRecordingPermissionsAgent"
+    },
+    {
+      "name": "Queue Score Cards",
+      "value": "$.interaction.queue.details.scoreCards",
+      "defaultValue": "queueScoreCards"
+    },
+    {
+      "name": "Queue Wrap Up Timer",
+      "value": "$.interaction.queue.details.wrapUpTimer",
+      "defaultValue": "queueWrapUpTimer"
+    },
+    {
+      "name": "Queue Custom Fields",
+      "value": "$.interaction.queue.details.customFields",
+      "defaultValue": "queueCustomFields"
+    },
+    {
+      "name": "Queue Wrap Up Extend",
+      "value": "$.interaction.queue.details.wrapUpExtend",
+      "defaultValue": "queueWrapUpExtend"
+    },
+    {
+      "name": "Queue Interaction Types",
+      "value": "$.interaction.queue.details.interactionTypes",
+      "defaultValue": "queueInteractionTypes"
+    },
+    {
+      "name": "Queue Outbound Caller Id",
+      "value": "$.interaction.queue.details.outboundCallerId",
+      "defaultValue": "queueOutboundCallerId"
+    },
+    {
+      "name": "Queue Interaction Results",
+      "value": "$.interaction.queue.details.interactionResults",
+      "defaultValue": "queueInteractionResults"
+    },
+
+    {
+      "name": "Queue Outbound Email Address",
+      "value": "$.interaction.queue.details.outboundEmailAddress",
+      "defaultValue": "queueOutboundEmailAddress"
+    },
+    {
+      "name": "Queue Live Transcribe User Enabled",
+      "value": "$.interaction.queue.details.liveTranscriptionUser",
+      "defaultValue": "queueLiveTranscribeUserEnabled"
+    },
+    {
+      "name": "Queue Live Transcribe Customer Enabled",
+      "value": "$.interaction.queue.details.liveTranscriptionCustomer",
+      "defaultValue": "queueLiveTranscribeCustomerEnabled"
+    },
+    {
+      "name": "Next Trigger Time",
+      "value": "$.interaction.nextTrigger.time",
+      "defaultValue": "nextTriggerTime"
+    },
+    {
+      "name": "Next Trigger Step",
+      "value": "$.interaction.nextTrigger.step",
+      "defaultValue": "nextTriggerStep"
+    },
+    {
+      "name": "Next Trigger Trigger",
+      "value": "$.interaction.nextTrigger.trigger",
+      "defaultValue": "nextTriggerTrigger"
+    },
+    {
+      "name": "Max Wait Time",
+      "value": "$.interaction.maxWait.time",
+      "defaultValue": "maxWaitTime"
+    },
+    {
+      "name": "Start Time",
+      "value": "$.interaction.startTime",
+      "defaultValue": "startTime"
+    },
+    {
+      "name": "End Time",
+      "value": "$.interaction.endTime",
+      "defaultValue": "endTime"
+    },
+    {
+      "name": "Age",
+      "value": "$.interaction.age",
+      "defaultValue": "age"
+    },
+    {
+      "name": "Status Last Updated At",
+      "value": "$.interaction.statusUpdatedAt",
+      "defaultValue": "statusLastUpdatedAt"
+    },
+    {
+      "name": "Number Of Transfers",
+      "value": "$.interaction.metrics.numberOfTransfers",
+      "defaultValue": "numberOfTransfers"
+    },
+    {
+      "name": "Wait Time",
+      "value": "$.interaction.metrics.waitTime",
+      "defaultValue": "waitTime"
+    },
+    {
+      "name": "Hold Time",
+      "value": "$.interaction.metrics.holdTime",
+      "defaultValue": "holdTime"
+    },
+    {
+      "name": "Time Interacting",
+      "value": "$.interaction.metrics.timeInteracting",
+      "defaultValue": "timeInteracting"
+    },
+    {
+      "name": "Handle Time",
+      "value": "$.interaction.metrics.handleTime",
+      "defaultValue": "handleTime"
+    },
+    {
+      "name": "Wrap Up Time",
+      "value": "$.interaction.metrics.wrapUpTime",
+      "defaultValue": "wrapUpTime"
+    },
+    {
+      "name": "Silence Time",
+      "value": "$.interaction.metrics.silenceTime",
+      "defaultValue": "silenceTime"
+    },
+    {
+      "name": "Overall Score",
+      "value": "$.interaction.scores.overall",
+      "defaultValue": "overallScore"
+    },
+    {
+      "name": "Self Score",
+      "value": "$.interaction.scores.selfScore",
+      "defaultValue": "selfScore"
+    },
+    {
+      "name": "Csat Value",
+      "value": "$.interaction.scores.csat.value",
+      "defaultValue": "csatValue"
+    },
+    {
+      "name": "Csat Comments",
+      "value": "$.interaction.scores.csat.comments",
+      "defaultValue": "csatComments"
+    },
+    {
+      "name": "Overall Sentiment",
+      "value": "$.interaction.scores.sentiment.overall",
+      "defaultValue": "overallSentiment"
+    },
+    {
+      "name": "User Reported Sentiment",
+      "value": "$.interaction.scores.sentiment.userReported",
+      "defaultValue": "userReportedSentiment"
+    },
+    {
+      "name": "User Sentiment",
+      "value": "$.interaction.scores.sentiment.user.sentiment",
+      "defaultValue": "userSentiment"
+    },
+    {
+      "name": "Customer Sentiment",
+      "value": "$.interaction.scores.sentiment.customer.sentiment",
+      "defaultValue": "customerSentiment"
+    },
+    {
+      "name": "Customer Score",
+      "value": "$.interaction.scores.sentiment.customer.score",
+      "defaultValue": "customerScore"
+    },
+    {
+      "name": "Server Name",
+      "value": "$.interaction.serverName",
+      "defaultValue": "serverName"
+    },
+    {
+      "name": "Process Id",
+      "value": "$.interaction.processId",
+      "defaultValue": "processId"
+    },
+    {
+      "name": "Timeout Time",
+      "value": "$.interaction.timeoutTime",
+      "defaultValue": "timeoutTime"
     }
-  }
+  ],
+  "documentVersion": "1.0"
 }
