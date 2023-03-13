@@ -79,19 +79,14 @@
   "moduleVersion": "1.0",
   "customVariables": [
     {
+      "name": "Status",
+      "value": "$.interaction.status",
+      "defaultValue": "status"
+    },
+    {
       "name": "Interaction Id",
       "value": "$.interaction.id",
       "defaultValue": "id"
-    },
-    {
-      "name": "Initial Communication Type",
-      "value": "$.interaction.initialCommType",
-      "defaultValue": "initialCommunicationType"
-    },
-    {
-      "name": "Initial Sub Communication Type",
-      "value": "$.interaction.initialSubCommType",
-      "defaultValue": "initialSubCommunicationType"
     },
     {
       "name": "Current Communication Type",
@@ -103,6 +98,17 @@
       "value": "$.interaction.subCommType",
       "defaultValue": "currentSubCommunicationType"
     },
+    {
+      "name": "Initial Communication Type",
+      "value": "$.interaction.initialCommType",
+      "defaultValue": "initialCommunicationType"
+    },
+    {
+      "name": "Initial Sub Communication Type",
+      "value": "$.interaction.initialSubCommType",
+      "defaultValue": "initialSubCommunicationType"
+    },
+  
     {
       "name": "Completion Type",
       "value": "$.interaction.completion.type",
@@ -132,11 +138,6 @@
       "name": "Is Max Wait",
       "value": "$.interaction.isMaxWait",
       "defaultValue": "isMaxWait"
-    },
-    {
-      "name": "Status",
-      "value": "$.interaction.status",
-      "defaultValue": "status"
     },
     {
       "name": "Is Completed",
