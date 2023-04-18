@@ -1,21 +1,30 @@
 {
     "api": {
-      "url": "https://dev-api.edifydev.net/v4/notifications",
+      "url": "https://{{edifyApiUrl}}s/v4/notifications",
       "method": "post",
       "header": {
         "u": "{{edify.user.email}}:{{edify.user.apiToken}}",
         "content-type": "application/json"
       },
       "onResponse": {
-        "valueAccessor": "",
+        "valueAccessor": "{{http-status-code}}",
         "valueMap": {
-          "any": {
-            "label": "",
+          "200": {
+            "label": "Success",
             "actions": [],
-            "exitPort": "",
+            "exitPort": "success",
             "exitPortValueMap": {},
             "exitPortValueAccessor": "",
-            "httpCode": "",
+            "httpCode": "200",
+            "collapsed": false
+          },
+          "any": {
+            "label": "Fail",
+            "actions": [],
+            "exitPort": "fail",
+            "exitPortValueMap": {},
+            "exitPortValueAccessor": "",
+            "httpCode": "any",
             "collapsed": false
           }
         }
@@ -36,10 +45,6 @@
                 "value": "html5"
               },
               {
-                "label": "Push Notification",
-                "value": "push"
-              },
-               {
                 "label": "Toast Notification",
                 "value": "toast"
               }
@@ -49,150 +54,97 @@
           },
           { 
             "api": {
-            "url": "https://dev-api.edifydev.net/v4/users",
-            "method": "get",
-            "headers": {
+              "url": "https://{{edifyApiUrl}}/v4/users",
+              "method": "get",
+              "headers": {
                 "u": "{{edify.user.email}}:{{edify.user.apiToken}}"
-            },
-            "labelFormat": "{{$.lastName}}, {{$.firstName}}",
-            "valueFormat": "{{$.userId}}",
-            "valueSource": "$.users"
+              },
+              "labelFormat": "{{$.lastName}}, {{$.firstName}}",
+              "valueFormat": "{{$.userId}}",
+              "valueSource": "$.users"
+              },
+            "name": "users",
+            "type": "multiselect",
+            "label": "Users",
+            "valuesType": "static",
+            "defaultValue": []
           },
-          "name": "users",
-          "type": "dropdown",
-          "label": "Users",
-          "valuesType": "static",
-          "defaultValue": ""
+          {
+            "name": "title",
+            "type": "input",
+            "label": "Title",
+            "subtype": "text",
+            "valuesType": "static",
+            "defaultValue": ""
           },
-      {
-        "name": "title",
-        "type": "input",
-        "label": "Title",
-        "subtype": "text",
-        "valuesType": "static",
-        "defaultValue": ""
-    },
+          {
+            "name": "body",
+            "type": "input",
+            "label": "Body",
+            "subtype": "text",
+            "valuesType": "static",
+            "defaultValue": ""
+          },
+          {
+            "name": "data",
+            "type": "input",
+            "label": "Data",
+            "subtype": "text",
+            "valuesType": "static",
+            "defaultValue": ""
+          },
+          {
+            "name": "action",
+            "type": "dropdown",
+            "label": "HTML Notification Action Type",
+            "values": [
+              {
+                "label": "New Notification",
+                "value": "newNotification"
+              },
+              {
+                "label": "Clear Notification",
+                "value": "clearNotification"
+              }
     
-    {
-      "name": "body",
-      "type": "input",
-      "label": "Body",
-      "subtype": "text",
-      "valuesType": "static",
-      "defaultValue": ""
-  }
-
-  
+            ],
+            "subtype": "text",
+            "valuesType": "static",
+            "defaultValue": "newNotification",
+            "conditionalRenderConfig": {
+              "targetName": "type",
+              "condition": "equalTo",
+              "compareValue": "html5"
+            }
+          },   
+          {
+            "name": "iconURL",
+            "type": "input",
+            "label": "Icon Url",
+            "subtype": "text",
+            "valuesType": "static",
+            "defaultValue": "",
+            "conditionalRenderConfig": {
+              "targetName": "type",
+              "condition": "equalTo",
+              "compareValue": "html5"
+            }
+          },
+          {
+            "name": "timeOut",
+            "type": "input",
+            "label": "Timeout (seconds)",
+            "subtype": "integer",
+            "valuesType": "",
+            "defaultValue": "5",
+            "conditionalRenderConfig": {
+              "targetName": "type",
+              "condition": "equalTo",
+              "compareValue": "toast"
+            }
+          }
         ]
-      },  
-      {
-        "name": "data",
-        "type": "input",
-        "label": "Data",
-        "subtype": "text",
-        "valuesType": "static",
-        "defaultValue": "",
-        "conditionalRenderConfig": {
-          "targetName": "type",
-          "condition": "notEqualTo",
-          "compareValue": "push" 
-        }
-      },
-
-      {
-        "name": "data",
-        "type": "dropdown",
-        "label": "Data",
-        "inputs": [
-          {
-            "name": "channelId",
-            "label": "Channel Id",
-            "type": "input",
-            "subtype": "text",
-            "valuesType": "static"
-
-          },
-          { 
-            "name":"notificationId",
-            "label":"Notification Id",
-            "type": "input",
-            "subtype": "text",
-            "valuesType": "static"
-          }
-        ],
-        "conditionalRenderConfig": {
-          "targetName": "type",
-          "condition": "equalTo",
-          "compareValue": "push" 
-        }
-      },
-      {
-        "name": "action",
-        "type": "dropdown",
-        "label": "Action",
-        "values": [
-          {
-            "label": "New Notification",
-            "value": "newNotification"
-          },
-          {
-            "label": "Clear Notification",
-            "value": "clearNotification"
-          }
-
-        ],
-        "subtype": "text",
-        "valuesType": "static",
-        "defaultValue": "newNotification",
-        "conditionalRenderConfig": {
-          "targetName": "type",
-          "condition": "equalTo",
-          "compareValue": "html5"
-        }
-      },
-
-      {
-        "name": "iconURL",
-        "type": "input",
-        "label": "Icon Url",
-        "subtype": "text",
-        "valuesType": "static",
-        "defaultValue": "",
-        "conditionalRenderConfig": {
-          "targetName": "type",
-          "condition": "equalTo",
-          "compareValue": "html5"
-        }
-      },
-
-      {
-        "name": "timeOut",
-        "type": "input",
-        "label": "Timeout",
-        "subtype": "integer",
-        "valuesType": "",
-        "defaultValue": "5",
-        "conditionalRenderConfig": {
-          "targetName": "type",
-          "condition": "equalTo",
-          "compareValue": "push"
-        }
-      },
-      {
-        "name": "badge",
-        "type": "input",
-        "label": "Badge",
-        "subtype": "integer",
-        "valuesType": "",
-        "defaultValue": "",
-        "conditionalRenderConfig": {
-          "targetName": "type",
-          "condition": "equalTo",
-          "compareValue": "push"
-        }
       }
-     
-      
     ],
     "exitPorts": [
       {
@@ -200,14 +152,13 @@
         "label": "Success",
         "hoverColor": "#3E5A2C",
         "backgroundColor": "#4F7339"
-    },
-    {
+      },
+      {
         "name": "fail",
         "label": "Fail",
         "hoverColor": "#527E36",
         "backgroundColor": "#5D933C"
-    }
-  
+      }
     ],
     "publisher": {
       "name": "Edify Labs, Inc.",
@@ -224,5 +175,4 @@
     "moduleVersion": "1.0",
     "documentVersion": "1.0",
     "customVariables": []
-  
   }
