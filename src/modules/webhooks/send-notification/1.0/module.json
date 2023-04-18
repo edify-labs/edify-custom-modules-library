@@ -1,6 +1,6 @@
 {
     "api": {
-      "url": "https://{{edifyApiUrl}}s/v4/notifications",
+      "url": "https://{{edifyApiUrl}}/v4/notifications",
       "method": "post",
       "header": {
         "u": "{{edify.user.email}}:{{edify.user.apiToken}}",
