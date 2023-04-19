@@ -1,0 +1,178 @@
+{
+    "api": {
+      "url": "https://{{edifyApiUrl}}/v4/notifications",
+      "method": "post",
+      "header": {
+        "u": "{{edify.user.email}}:{{edify.user.apiToken}}",
+        "content-type": "application/json"
+      },
+      "onResponse": {
+        "valueAccessor": "{{http-status-code}}",
+        "valueMap": {
+          "200": {
+            "label": "Success",
+            "actions": [],
+            "exitPort": "success",
+            "exitPortValueMap": {},
+            "exitPortValueAccessor": "",
+            "httpCode": "200",
+            "collapsed": false
+          },
+          "any": {
+            "label": "Fail",
+            "actions": [],
+            "exitPort": "fail",
+            "exitPortValueMap": {},
+            "exitPortValueAccessor": "",
+            "httpCode": "any",
+            "collapsed": false
+          }
+        }
+      }
+    },
+    "name": "Send Notification",
+    "sections": [
+      {
+        "label": "Notification",
+        "inputs": [
+          {
+            "name": "type",
+            "type": "dropdown",
+            "label": "Type",
+            "values": [
+              {
+                "label": "HTML5",
+                "value": "html5"
+              },
+              {
+                "label": "Toast Notification",
+                "value": "toast"
+              }
+  
+            ],
+            "defaultValue": "html5"
+          },
+          { 
+            "api": {
+              "url": "https://{{edifyApiUrl}}/v4/users",
+              "method": "get",
+              "headers": {
+                "u": "{{edify.user.email}}:{{edify.user.apiToken}}"
+              },
+              "labelFormat": "{{$.lastName}}, {{$.firstName}}",
+              "valueFormat": "{{$.userId}}",
+              "valueSource": "$.users"
+              },
+            "name": "users",
+            "type": "multiselect",
+            "label": "Users",
+            "valuesType": "static",
+            "defaultValue": []
+          },
+          {
+            "name": "title",
+            "type": "input",
+            "label": "Title",
+            "subtype": "text",
+            "valuesType": "static",
+            "defaultValue": ""
+          },
+          {
+            "name": "body",
+            "type": "input",
+            "label": "Body",
+            "subtype": "text",
+            "valuesType": "static",
+            "defaultValue": ""
+          },
+          {
+            "name": "data",
+            "type": "input",
+            "label": "Data",
+            "subtype": "text",
+            "valuesType": "static",
+            "defaultValue": ""
+          },
+          {
+            "name": "action",
+            "type": "dropdown",
+            "label": "HTML Notification Action Type",
+            "values": [
+              {
+                "label": "New Notification",
+                "value": "newNotification"
+              },
+              {
+                "label": "Clear Notification",
+                "value": "clearNotification"
+              }
+    
+            ],
+            "subtype": "text",
+            "valuesType": "static",
+            "defaultValue": "newNotification",
+            "conditionalRenderConfig": {
+              "targetName": "type",
+              "condition": "equalTo",
+              "compareValue": "html5"
+            }
+          },   
+          {
+            "name": "iconURL",
+            "type": "input",
+            "label": "Icon Url",
+            "subtype": "text",
+            "valuesType": "static",
+            "defaultValue": "",
+            "conditionalRenderConfig": {
+              "targetName": "type",
+              "condition": "equalTo",
+              "compareValue": "html5"
+            }
+          },
+          {
+            "name": "timeOut",
+            "type": "input",
+            "label": "Timeout (seconds)",
+            "subtype": "integer",
+            "valuesType": "",
+            "defaultValue": "5",
+            "conditionalRenderConfig": {
+              "targetName": "type",
+              "condition": "equalTo",
+              "compareValue": "toast"
+            }
+          }
+        ]
+      }
+    ],
+    "exitPorts": [
+      {
+        "name": "success",
+        "label": "Success",
+        "hoverColor": "#3E5A2C",
+        "backgroundColor": "#4F7339"
+      },
+      {
+        "name": "fail",
+        "label": "Fail",
+        "hoverColor": "#527E36",
+        "backgroundColor": "#5D933C"
+      }
+    ],
+    "publisher": {
+      "name": "Edify Labs, Inc.",
+      "website": "https://edify.cx",
+      "description": "This creates a new notification and sends to a specified set of users",
+      "licenseType": "Example License"
+    },
+    "formatting": {
+      "titleBar": {
+        "icon": "bell",
+        "backgroundColor": "#4F7339"
+      }
+    },
+    "moduleVersion": "1.0",
+    "documentVersion": "1.0",
+    "customVariables": []
+  }
